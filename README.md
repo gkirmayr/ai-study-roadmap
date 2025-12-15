@@ -1,4 +1,4 @@
-# 📘 AI Study Roadmap – Gatinha biby
+# 📘 AI Study Roadmap – Gabryelle Kirmayr
 
 
 Este repositório concentra todo meu plano de estudo focado em:
