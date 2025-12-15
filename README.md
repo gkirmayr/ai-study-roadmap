@@ -15,12 +15,20 @@ Este repositório concentra todo meu plano de estudo focado em:
 
 
 ## 🧠 Estrutura
-- **00-setup/** → instalações, ambientes, configs
-- **01-python-basics/** → fundamentos, exercícios e notebooks
-- **02-ml-basico/** → machine learning clássico
-- **03-ia-aplicada/** → agentes, LLMs e RAG
-- **04-projetos/** → projetos públicos (Kaggle e estudos pessoais)
 
+- **.venv/** → ambiente virtual Python  
+- **Estudos/** → conteúdos de estudo e aprendizado  
+  - **00-setup/** → instalações, ambientes e configurações iniciais  
+  - **01-python-basics/** → fundamentos de Python, exercícios e notebooks  
+  - **02-ml-basico/** → machine learning clássico  
+  - **03-ia-aplicada/** → agentes, LLMs e RAG  
+- **Projetos/** → projetos práticos  
+  - **estudo-dirigido/** → projetos de estudo guiado  
+  - **kaggle/** → competições e notebooks do Kaggle  
+  - **rag-django-chat/** → chat com RAG usando Django  
+- **.env** → variáveis de ambiente  
+- **README.md** → documentação do projeto  
+- **requirements.txt** → dependências do projeto
 
 ---
 
