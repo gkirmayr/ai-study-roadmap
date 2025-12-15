@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat RAG com Django</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f4f4f9; }
+        .chat-box { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        input[type="text"] { width: 70%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        button { padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #218838; }
+        .resposta { margin-top: 20px; padding: 15px; background-color: #e9ecef; border-left: 5px solid #28a745; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>🤖 Super Assistente Tech</h1>
+    
+    <div class="chat-box">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="pergunta" placeholder="Pergunte sobre Python, SQL, Django..." required>
+            <button type="submit">Perguntar</button>
+        </form>
+
+        {% if resposta %}
+            <div class="resposta">
+                <h3>Resposta da IA:</h3>
+                <p>{{ resposta|linebreaks }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
