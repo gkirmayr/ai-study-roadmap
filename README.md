@@ -16,7 +16,6 @@ Este repositório concentra todo meu plano de estudo focado em:
 
 ## 🧠 Estrutura
 
-- **.venv/** → ambiente virtual Python  
 - **Estudos/** → conteúdos de estudo e aprendizado  
   - **00-setup/** → instalações, ambientes e configurações iniciais  
   - **01-python-basics/** → fundamentos de Python, exercícios e notebooks  
