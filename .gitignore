@@ -1,0 +1,11 @@
+# Segredos e Configurações locais
+.env
+.venv/
+env/
+__pycache__/
+
+# Bancos de Dados
+*.sqlite3
+db/
+*.db
+*.bin
