@@ -1,5 +1,10 @@
 import random
 import pandas as pd
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+import joblib as jb
+
+
 
 print("------------------------------------------------")
 
@@ -224,10 +229,12 @@ class ModeloIA():
             print(f"Prevendo resultado para '{dados}'... Acurácia do modelo: {self.acuracia:.2f}")
         else:
             print("ERRO: O modelo precisa ser treinado antes de prever!")
+    
+    
 
 
 # 1. Instancie o modelo
-meu_modelo = ModeloIA("Chatbot NTT", "NLP")
+meu_modelo = ModeloIA("Chatbot", "NLP")
 
 # 2. Tente prever ANTES de treinar (Tem que dar erro)
 meu_modelo.fazer_previsao("Olá, tudo bem?")
@@ -242,7 +249,153 @@ print(meu_modelo)
 
 print("\n------------------------------------------------")
 
+#22/12/2025
+
+print("\n Exercício 10 -O Primeiro Dataframe")
+
+dados = {
+    'Nome': ['Ana', 'Bruno', 'Carlos', 'Diana', 'Eduardo'],
+    'Idade': [28, 34, 45, 23, 38],
+    'Departamento': ['RH', 'TI', 'TI', 'Marketing', 'TI'],
+    'Salario': [4000, 7000, 12000, 3500, 8500]
+}
+
+df = pd.DataFrame(dados)
+
+media_idade = df['Idade'].mean()
+
+departamento_ti = df[df["Departamento"] == 'TI']
+print("\n", df.head(3))
+print("\nMéddia das idades do funcionaios: ", media_idade)
+print("\nFuncianarios da ti: \n", departamento_ti)
+
+print("\n------------------------------------------------")
+
+print("\n Exercício 11 - Herança e Polimorfismo")
+
+class Mãe():
+    def __init__(self, nome):
+        self.nome = nome
+
+    def saudacao(self):
+        print(f"Olá, meu nome é {self.nome}")
+
+    def responder(self):
+        print("Não sei responder.")
+
+class BotFinanceiro(Mãe):
+    def responder(self):
+        print("Posso ajudar com faturas")
+
+class BotSuporte(Mãe):
+    def responder(self):
+        print("Posso ajudar com problemas técnicos")
+
+# Importante instanciar os objetos
+bot_financeiro = BotFinanceiro("Bot Financeiro")
+bot_suporte = BotSuporte("Bot Suporte")
 
 
+lista_bots = [bot_financeiro, bot_suporte]
+
+for bot in lista_bots:
+    bot.responder()
+    bot.saudacao()
 
 
+print("\n------------------------------------------------")
+
+print("Exercício 12 -  ETL Real")
+
+dados_vendas = {
+    'Vendedor': ['Ana', 'Ana', 'Bruno', 'Bruno', 'Carla'],
+    'Produto': ['Notebook', 'Mouse', 'Monitor', 'Teclado', 'Servidor'],
+    'Valor': [3500.00, 50.00, 1200.00, None, 15000.00] 
+}
+
+df = pd.DataFrame(dados_vendas)
+
+media = df['Valor'].mean() # Metodo mean ja calcula a media da coluna
+
+df['Valor'] = df['Valor'].fillna(media)
+
+df['Status'] = df['Valor'].apply(lambda x: "Venda Alta" if x > 500 else "Venda Baixa")
+
+print(f"\n", df.groupby('Vendedor')['Valor'].sum())
+
+print(df)
+
+print("\n------------------------------------------------")
+
+print("\n Exercício 13 - Regressão Linear Simples")
+
+dados = {
+    'Anos_Experiencia': [1, 2, 3, 4, 6, 8, 10],   # X (Features)
+    'Salario': [2500, 3000, 3800, 4200, 6000, 8500, 11000] # y (Target/Alvo)
+}
+df = pd.DataFrame(dados)
+
+X = df[['Anos_Experiencia']] 
+y = df['Salario']
+
+# Instanciando o Cérebro da IA (Regressão Linear)
+modelo = LinearRegression()
+
+#  O Treinamento (Aqui a mágica acontece)
+# A IA tenta encontrar a fórmula matemática que liga X a y
+modelo.fit(X, y) 
+print("IA Treinada com sucesso!")
+
+# 5. Fazendo Previsões
+anos_para_prever = [[5], [15]] # Quero saber de 5 e de 15 anos
+previsoes = modelo.predict(anos_para_prever)
+
+print(f"\nPrevisão para 5 anos de exp: R$ {previsoes[0]:.2f}")
+print(f"Previsão para 15 anos de exp: R$ {previsoes[1]:.2f}")
+
+# Extra: Mostrando a "inteligência" (O Coeficiente angular da reta)
+print(f"\nA cada ano de experiência, o salário sobe aprox: R$ {modelo.coef_[0]:.2f}")
+
+
+print("\n------------------------------------------------")
+
+print("\n Exercício 14 - Regressão Linear minha")
+
+dados_historicos = {
+    'Dados_GB': [20, 30, 30, 40, 50],
+    'Tempo': [12, 25, 32, 45, 52]
+}
+
+df = pd.DataFrame(dados_historicos)
+
+X = df[['Dados_GB']]
+y = df['Tempo']
+
+modelo = LinearRegression()
+
+modelo.fit(X, y)
+
+previsao_cliente = [[100]]
+
+previsoes = modelo.predict(previsao_cliente)
+
+print(f"\nPara processar 100 GB, o sistema levará aprox: {previsoes[0]:.2f} minutos.")
+
+
+print("Parte de Deply")
+
+# Salvando modelo na pasta raiz
+print("\n Salvando modelo")
+jb.dump(modelo, 'modelo_gigas.pkl')
+
+
+# Carregar o modelo e salvar em uma variavel
+modelo_carregado = jb.load('modelo_gigas.pkl')
+
+
+#Fazendo a previsao usando o modelo que foi salvo o arquivo
+previsao = modelo_carregado.predict([[200]])
+
+print(f"O modelo carregado prevê que 200GB levam: {previsao[0]:.2f} min")
+
+print("\n------------------------------------------------")
